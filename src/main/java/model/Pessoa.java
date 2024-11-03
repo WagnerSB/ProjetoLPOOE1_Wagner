@@ -1,33 +1,50 @@
 package model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Table;
 
 
 
-
-public class Pessoa {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Pessoa implements Serializable {
    
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    
+    @Column(length = 50, nullable = false)
     private String nome;
-    private Date dataNascimento;
+    @Column(name = "data_nascimento")
+    private LocalDate dataNascimento;
     private String email;
     
-//    public Pessoa()
-//    {     
-//    }
+    public Pessoa()
+    {     
+        
+    }
     
     public Pessoa(String nome)
     {     
         nome = this.nome;
     }
     
-    public Pessoa(String nome, Date dataNascimento)
+    public Pessoa(String nome, LocalDate dataNascimento)
     {     
         nome = this.nome;
         dataNascimento = this.dataNascimento;
     }
     
-    public Pessoa(String nome, Date dataNascimento, String email)
+    public Pessoa(String nome, LocalDate dataNascimento, String email)
     {     
         nome = this.nome;
         email = this.email;
@@ -52,7 +69,7 @@ public class Pessoa {
         return email;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
     
@@ -70,7 +87,7 @@ public class Pessoa {
         this.email = email;
     }
     
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
     
