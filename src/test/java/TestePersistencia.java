@@ -5,13 +5,12 @@
 
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import model.Aluno;
 import model.Ministrante;
-import model.Pessoa;
+import model.Oficina;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,11 +52,26 @@ public class TestePersistencia {
         m.setTitulacao("Doutora");
         m.setEspecialidade("Computação aplicada");
         
+        Oficina o = new Oficina();
+        o.setNome("Processamento Linguagem Natural");
+        o.setDescricao("Curso sobre NLP");
+        o.setData(new Date());
+        o.setDuracao(3.0);
+        o.setMinistrante(m);
+        
+        o.addAluno(a);
+        a.addOficina(o);
+        
+        System.out.println("Alunos: "+a);
+        System.out.println("Oficinas: "+o);
+        System.out.println("Ministrantes: "+m);
+        
         
         
         try {
             jpa.persist(a);
             jpa.persist(m);
+            jpa.persist(o);
 
         } catch (Exception e) {
             System.err.println("Erro de persistencia: "+e);
