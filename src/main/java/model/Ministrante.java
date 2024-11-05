@@ -1,6 +1,7 @@
 
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,10 +22,12 @@ public class Ministrante extends Pessoa{
     
     public Ministrante(String nome) {
         super(nome);
+        oficinas = new ArrayList<>();
     }
     
     public Ministrante() {
         super();
+        oficinas = new ArrayList<>();
     }
 
     public String getTitulacao() {
