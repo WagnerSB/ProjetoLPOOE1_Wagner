@@ -46,6 +46,13 @@ public class TestePersistencia {
         LocalDate nascimento = LocalDate.parse("20/01/2005", dtf);
         a.setDataNascimento(nascimento);
         
+        Aluno aa = new Aluno();
+        aa.setNome("Ana Maria");
+        aa.setEmail("ana@teste.com");
+        aa.setMatricula("20231PF.CC0098");
+        LocalDate nascimento2 = LocalDate.parse("02/08/2003", dtf);
+        aa.setDataNascimento(nascimento2);
+        
         Ministrante m = new Ministrante();
         
         m.setNome("Maria Aparecida");
@@ -55,14 +62,27 @@ public class TestePersistencia {
         Oficina o = new Oficina();
         o.setNome("Processamento Linguagem Natural");
         o.setDescricao("Curso sobre NLP");
-        o.setData(new Date());
+        o.setData(new Date(2024 - 1900, 10, 15, 10, 30));
         o.setDuracao(3.0);
         o.setMinistrante(m);
         
         o.addAluno(a);
+        o.addAluno(aa);
         a.addOficina(o);
+        aa.addOficina(o);
         
-        System.out.println("Alunos: "+a);
+        
+        Oficina oo = new Oficina();
+        oo.setNome("Introdução ao java");
+        oo.setDescricao("Curso sobre Java");
+        oo.setData(new Date(2024 - 1900, 10, 15, 8, 0));
+        oo.setDuracao(2.0);
+        oo.setMinistrante(m);
+        
+        oo.addAluno(a);
+        a.addOficina(oo);
+        
+        System.out.println("Alunos: "+a+"\n"+aa);
         System.out.println("Oficinas: "+o);
         System.out.println("Ministrantes: "+m);
         
@@ -70,8 +90,10 @@ public class TestePersistencia {
         
         try {
             jpa.persist(a);
+            jpa.persist(aa);
             jpa.persist(m);
             jpa.persist(o);
+            jpa.persist(oo);
 
         } catch (Exception e) {
             System.err.println("Erro de persistencia: "+e);

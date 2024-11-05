@@ -26,6 +26,8 @@ public abstract class Pessoa implements Serializable {
     private String nome;
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
+    
+    @Column(length = 100)
     private String email;
     
     public Pessoa()
